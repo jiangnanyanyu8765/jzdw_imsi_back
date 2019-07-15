@@ -1,0 +1,68 @@
+<MRLocate>
+    <!-- 环境(1:本地;0:集群) -->
+    <local>1</local>
+    <!-- mr接入类型：1：本地；2：hdfs；3：hive；4：kafka -->
+    <mr.type>1</mr.type>
+    <!-- mr目录 -->
+    <!--<mr.inputpath>D:\\Work\\TEST\\MrLocate\\MR</mr.inputpath>-->
+    <mr.inputpath>C:\\Users\\wtrover\\Desktop\\山西\\mr_xdr_test\\mr</mr.inputpath>
+    <!-- 定位文件输出目录 -->
+    <!--<resultpath>D:\\Work\\TEST\\MrLocate\\OUT_IMSI</resultpath>-->
+    <resultpath>C:\\Users\\wtrover\\Desktop\\山西\\mr_xdr_test\\OUT_IMSI</resultpath>
+    <!-- 日志目录 -->
+    <logPath></logPath>
+    <!-- 分片大小（单位M） -->
+    <splitsize>200</splitsize>
+    <!-- 队列名 -->
+    <queuename>bonc_songpeiqiang</queuename>
+    <!--分区个数 -->
+    <reducenum>1</reducenum>
+
+    <mr>
+        <!-- mr目录是否到小时（0：没到，1：到了） -->
+        <!--<toHour>0</toHour>-->
+        <!-- mr天和小时目录分隔符（0：无，1：有） -->
+        <!--<fileSep>0</fileSep>-->
+        <!-- mr 文件是否压缩（0：未压缩；1：snappy压缩格式） -->
+        <!--<mrgzip>0</mrgzip>-->
+        <!-- mr是否需要合并（false：不需要；true：需要） -->
+        <needCombine>false</needCombine>
+        <!-- imsi是否需要回填（0：不需要；1：需要） -->
+        <imsibackfill>1</imsibackfill>
+        <!-- 解析类完整包类名 -->
+        <classname>com.bonc.decodeMrXdr.MrXdrDecodeShanXiTest</classname>
+    </mr>
+
+    <!-- xdr 目录 -->
+    <!--<xdr.inputpath>D:\\Work\\TEST\\MrLocate\\XDR\\</xdr.inputpath>-->
+    <xdr.inputpath>C:\\Users\\wtrover\\Desktop\\山西\\mr_xdr_test\\xdr221112</xdr.inputpath>
+    <xdr>
+        <!-- 解析类完整包类名 -->
+        <classname>com.bonc.decodeMrXdr.MrXdrDecodeShanXiTest</classname>
+    </xdr>
+    <!-- 根据mr数据时间过滤xdr数据, 单位分钟 eg: mr是1000-1100的数据 默认xdr数据为 0940-1100的数据 如需本地测试xdr只有一个文件 须将下面两个参数配为0即可 -->
+    <!-- 前20分钟 -->
+    <advanceMinute>0</advanceMinute>
+    <!-- 后0分钟 -->
+    <laterMinute>0</laterMinute>
+    <!-- xdr时间偏移量（默认0） -->
+    <xdr2MrTimeOffset>0</xdr2MrTimeOffset>
+    <!-- xdr时间间隔（单位：秒） -->
+    <xdr2MrInterval>180</xdr2MrInterval>
+    <!-- mr时间间隔（单位：秒） -->
+    <mrInterval>30</mrInterval>
+    <!-- mr最大数量 -->
+    <mrMaxSize>150</mrMaxSize>
+
+    <!-- 过滤文件类的设置 -->
+    <!--<pathfilterclass>com.bonc.decodeMrXdr.filter.MrFilterShanXi</pathfilterclass>-->
+    <pathfilterclass></pathfilterclass>
+    <!-- 是否需要合并类（false：不需要；true：需要） -->
+    <isCombine>false</isCombine>
+    <!-- 自定义分区类 -->
+    <partitionerClass>com.bonc.decodeMrXdr.shuffle.shanxi.MyPartitioner</partitionerClass>
+    <!-- 自定义分组类 -->
+    <groupcomparer>com.bonc.decodeMrXdr.shuffle.shanxi.MyGroupComparator</groupcomparer>
+    <!-- 自定义排序类 -->
+    <sortcomparer>com.bonc.decodeMrXdr.shuffle.shanxi.MySortComparator</sortcomparer>
+</MRLocate>

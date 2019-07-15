@@ -1,0 +1,69 @@
+<MRLocate>
+    <!-- 环境(1:本地;0:集群) -->
+    <local>1</local>
+    <!-- mr接入类型：1：本地；2：hdfs；3：hive；4：kafka -->
+    <!--<mr.type>1</mr.type>-->
+    <!-- mr目录 -->
+    <mr.inputpath>G:\\bonc\\idea\\guizhou\\样例数据\\mrxdr\\</mr.inputpath>
+    <!--<mr.inputpath>/tenantDFGX/mrxdr_data/</mr.inputpath>-->
+    <!-- 定位文件输出目录 -->
+    <resultpath>G:\\bonc\\idea\\guizhou\\样例数据\\mrott\\</resultpath>
+    <!--<resultpath>/tenantDFGX/mrott_data/</resultpath>-->
+    <!-- 日志目录 -->
+    <logPath></logPath>
+    <!-- 分片大小（单位M） -->
+    <splitsize>128</splitsize>
+    <!-- 队列名 -->
+    <queuename>bonc_songpeiqiang</queuename>
+    <!--分区个数 -->
+    <reducenum>2</reducenum>
+
+    <GdCorrectFile>D:/Work/2019位置服务平台/数据/纠偏库/贵州/24correct_gd.csv</GdCorrectFile>
+    <BdCorrectFile>D:/Work/2019位置服务平台/数据/纠偏库/贵州/24correct_bd.csv</BdCorrectFile>
+    <CorrectFile>D:/Work/2019位置服务平台/数据/纠偏库/贵州/24correct.csv</CorrectFile>
+
+    <mr>
+        <!-- mr目录是否到小时（0：没到，1：到了） -->
+        <!--<toHour>0</toHour>-->
+        <!-- mr天和小时目录分隔符（0：无，1：有） -->
+        <!--<fileSep>0</fileSep>-->
+        <!-- mr 文件是否压缩（0：未压缩；1：snappy压缩格式） -->
+        <!--<mrgzip>0</mrgzip>-->
+        <!-- imsi是否需要回填（0：不需要；1：需要） -->
+        <!--<imsibackfill>1</imsibackfill>-->
+        <!-- 解析类完整包类名 -->
+        <classname>com.bonc.decodeMrXdr.MrOttDecodeGuiZhou2</classname>
+    </mr>
+
+    <!-- ott 目录 -->
+    <ott.inputpath>G:\\bonc\\idea\\guizhou\\样例数据\\ott_hdfs\\</ott.inputpath>
+    <!--<ott.inputpath>/tenantDFGX/ott_data/</ott.inputpath>-->
+    <ott>
+        <!-- 解析类完整包类名 -->
+        <classname>com.bonc.decodeMrXdr.MrOttDecodeGuiZhou2</classname>
+    </ott>
+    <!-- 根据mr数据时间过滤xdr数据, 单位分钟 eg: mr是1000-1100的数据 默认xdr数据为 0940-1100的数据 如需本地测试xdr只有一个文件 须将下面两个参数配为0即可 -->
+    <!-- 前20分钟 实际值20，测试值0-->
+    <advanceMinute>0</advanceMinute>
+    <!-- 后0分钟 -->
+    <laterMinute>0</laterMinute>
+    <!-- xdr时间偏移量（默认0） -->
+    <xdr2MrTimeOffset>0</xdr2MrTimeOffset>
+    <!-- xdr时间间隔（单位：秒）未用 -->
+    <xdr2MrInterval>30</xdr2MrInterval>
+    <!-- mr时间间隔（单位：秒） -->
+    <mrInterval>30</mrInterval>
+    <!-- mr最大数量 -->
+    <mrMaxSize>150</mrMaxSize>
+
+    <!-- 过滤文件类的设置 -->
+    <pathfilterclass></pathfilterclass>
+    <!-- 是否需要合并（false：不需要；true：需要） -->
+    <!--<isCombine>false</isCombine>-->
+    <!-- 自定义分区类 -->
+    <partitionerClass>com.bonc.decodeMrXdr.shuffle.guizhouMrOtt.MyPartitioner</partitionerClass>
+    <!-- 自定义分组类 -->
+    <groupcomparer>com.bonc.decodeMrXdr.shuffle.guizhouMrOtt.MyGroupComparator</groupcomparer>
+    <!-- 自定义排序类 -->
+    <sortcomparer>com.bonc.decodeMrXdr.shuffle.guizhouMrOtt.MySortComparator</sortcomparer>
+</MRLocate>
